@@ -12,3 +12,5 @@ admin.site.register(Advisory)
 admin.site.register(Message)
 admin.site.register(SRMessage)
 admin.site.register(Person)
+
+# I did editing here
