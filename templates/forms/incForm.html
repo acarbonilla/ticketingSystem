@@ -1,0 +1,88 @@
+{% extends 'account/base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<style>
+    #hideme{
+    background-color:orange;
+    display:none;
+    }
+</style>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+
+        </div>
+        <div class="col-sm-6">
+            <h2 class="text-center">Incident Request Form</h2>
+            <form action="" method="POST">
+                {% csrf_token %}
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3">Requested By:</span>
+                        {% render_field form.member class="form-select"%}
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3">Category:</span>
+                        {% render_field form.category class="form-select"%}
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3">Description:</span>
+                        {% render_field form.description class="form-control"%}
+                    </div>
+
+                    {% if user.is_staff %}
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon3">Status:</span>
+                            {% render_field form.status class="form-select" id=""%}
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon3">Assigned To:</span>
+                            {% render_field form.assigned class="form-select" id=""%}
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon3">Assigned By:</span>
+                            {% render_field form.assignedBy class="form-select" id=""%}
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="basic-addon3">Update:</span>
+                            {% render_field form.ticketUpdate class="form-control" id=""%}
+                        </div>
+                    {% else %}
+                         <div class="input-group mb-3" id="hideme">
+                            <span class="input-group-text" id="basic-addon3">Status:</span>
+                            {% render_field form.status class="form-select" id=""%}
+                        </div>
+
+                        <div class="input-group mb-3" id="hideme">
+                            <span class="input-group-text" id="basic-addon3">Assigned To:</span>
+                            {% render_field form.assigned class="form-select" id=""%}
+                        </div>
+
+                        <div class="input-group mb-3" id="hideme">
+                            <span class="input-group-text" id="basic-addon3">Assigned By:</span>
+                            {% render_field form.assignedBy class="form-select" id=""%}
+                        </div>
+                         <div class="input-group mb-3" id="hideme">
+                            <span class="input-group-text" id="basic-addon3">Update:</span>
+                            {% render_field form.ticketUpdate class="form-control" id=""%}
+                        </div>
+                    {% endif %}
+
+                <input aria-controls="offcanvasTop" class="btn btn-primary"
+                       data-bs-target="#offcanvasTop" data-bs-toggle="offcanvas"
+                       type="submit" value="Submit"/>
+            </form>
+
+        </div>
+
+        <div class="col-sm-3">
+
+        </div>
+    </div>
+</div>
+{% endblock %}

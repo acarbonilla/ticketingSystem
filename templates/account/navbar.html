@@ -1,0 +1,87 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">iSupport</a>
+        <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler"
+                data-bs-target="#navbarSupportedContent" data-bs-toggle="collapse" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'authView' %}">Home</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                       role="button">
+                        Ticket Request
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'incForm' %}">Incident Request Form</a></li>
+                        <li><a class="dropdown-item" href="{% url 'srForm' %}">Service Request Form</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </li>
+                    <!-- This is for user that is member is staff -->
+                    {% if user.is_staff %}
+                    <li class="nav-item dropdown">
+                    <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                       role="button">
+                        Ticket Records
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="{% url 'staff' %}">Monitoring Ticket</a></li>
+                        <li><a class="dropdown-item" href="{% url 'closedTicket'%}">Closed Ticket</a></li>
+                    </ul>
+                </li>
+
+                    {%endif%}
+
+                {% else %}<!-- If user not login this is the navbar they can see -->
+                    <li class="nav-item">
+                        <a aria-current="page" class="nav-link active" href="{% url 'homeView' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'account_login' %}">Log In</a>
+                    </li>
+
+                {% endif %}
+
+            </ul>
+            <!-- This area is for user profile -->
+            {% if user.is_authenticated %}
+            <nav class="d-flex text-white">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                           role="button">
+                            {{user}}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'account_email' %}">Change Email</a></li>
+                            <li><a class="dropdown-item" href="{% url 'socialaccount_connections' %}">Social Account</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{% url 'account_logout' %}">Sign Out</a>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            {% else %}
+
+            {% endif %}
+
+        </div>
+    </div>
+</nav>

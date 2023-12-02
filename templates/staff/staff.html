@@ -1,0 +1,170 @@
+{% extends 'account/base.html' %}
+{% load mathfilters %}
+{% block content %}
+<meta http-equiv="refresh" content="10">
+{% if user.is_staff%}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <h5>Advisory:
+                {% for ad in advisory %}
+                {{ad.name}} {{ad.updated}}
+                {% endfor %}
+            </h5>
+        </div>
+
+    </div> <!-- End of Announcement -->
+
+    <div class="row">
+        <div class="col-sm-12">
+            {% if sd %}
+            <button class="btn btn-primary position-relative" type="button">
+                Open Ticket
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                       {{countOpen}} </span>
+            </button>
+            {% endif %}
+
+            <!-- This button is for Deskside counting -->
+            {% if ds %}
+            <button class="btn btn-primary position-relative" type="button">
+                Ticket Assigned
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                         {{dsTicketOpen}} </span>
+            </button>
+          &nbsp; &nbsp;
+            <button class="btn btn-primary position-relative" type="button">
+                Ticket Closed Total
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                           {{dsTicketClosed}} </span>
+            </button>
+            {% endif %}
+
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Ticket #</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Created On</th>
+                    <th scope="col">Expired On</th>
+                    <th scope="col">Assigned To</th>
+                    <th scope="col">Created By</th>
+                </tr>
+                </thead>
+                {% if sd %}
+                {% for ticket in incUserView %}
+                <tbody>
+                <tr>
+                    <td>
+                        <a class="btn btn-secondary" href="{% url 'incDetails' ticket.ticket %}">
+                            {{ticket.ticket}}
+                        </a>
+                    </td>
+                    <td>{{ticket.category}}</td>
+                    <td>{{ticket.created}}</td>
+                    <td>{{ticket.created |add:expireOn}}</td>
+                    <td>{{ticket.assigned }}</td>
+                    <td>{{ticket.member }}</td>
+                    <td>
+                        <a class="btn btn-secondary" href="{% url 'sdINC' ticket.ticket %}">
+                            Update
+                        </a>
+                    </td>
+
+                </tr>
+                </tbody>
+                {% endfor %}
+
+                {% for ticket in srUserView %}
+                <tbody>
+                <tr>
+                    <td>
+                        <a class="btn btn-secondary" href="{% url 'srDetails' ticket.tickets %}">
+                            {{ticket.tickets}}
+                        </a>
+                    </td>
+                    <td>{{ticket.category}}</td>
+                    <td>{{ticket.created}}</td>
+                     <td>{{ticket.created |add:expireOn}}</td>
+                    <td>{{ticket.assigned }}</td>
+                    <td>{{ticket.member }}</td>
+                    <td>
+                        <a class="btn btn-secondary" href="{% url 'sdSR' ticket.tickets %}">
+                            Update
+                        </a>
+                    </td>
+
+                </tr>
+                </tbody>
+                {% endfor %}
+                {%endif%}
+
+
+                {% if ds %}
+
+                {% for ticket in desksideINCView %}
+                {% if ticket.assigned.user.id == user.id and ticket.status == "Open" %}
+                <tbody>
+                <tr>
+                    <td>
+                        <a class="btn btn-secondary" href="{% url 'incDetails' ticket.ticket %}">
+                            {{ticket.ticket}}
+                        </a>
+                    </td>
+                    <td>{{ticket.category}}</td>
+
+                    <td>{{ticket.created}}</td>
+                    <td>{{ticket.assigned }}</td>
+                    <td>{{ticket.member }}</td>
+                    <td>
+                        <a class="btn btn-secondary" href="{% url 'deskINC' ticket.ticket %}">
+                            Update
+                        </a>
+                    </td>
+
+                </tr>
+                </tbody>
+                {% endif %}
+                {% endfor %}
+
+                <!-- This is for Deskside View Service request -->
+                {% for ticket in desksideSRView %}
+                {% if ticket.assigned.user.id == user.id and ticket.status == "Open" %}
+                <tbody>
+                <tr>
+                    <td>
+                        <a class="btn btn-secondary" href="{% url 'srDetails' ticket.tickets %}">
+                            {{ticket.tickets}}
+                        </a>
+                    </td>
+                    <td>{{ticket.category}}</td>
+
+                    <td>{{ticket.created}}</td>
+                    <td>{{ticket.assigned }}</td>
+                    <td>{{ticket.member }}</td>
+                    <td>
+                        <a class="btn btn-secondary" href="{% url 'deskSR' ticket.tickets %}">
+                            Update
+                        </a>
+                    </td>
+
+                </tr>
+                </tbody>
+                {% endif %}
+                {% endfor %}
+
+                {% endif %}
+            </table>
+        </div> <!-- End for Service Desk -->
+
+
+    </div>
+
+
+</div>
+
+
+{%else%}
+<h1>You are not allowed here! Click this back to your homepage <a href="{%url 'authView'%}">Home </a></h1>
+{% endif%} <!--End for user staff condition-->
+{% endblock %}

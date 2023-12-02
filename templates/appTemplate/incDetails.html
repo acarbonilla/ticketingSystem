@@ -1,0 +1,144 @@
+{% extends 'account/base.html' %}
+
+{% block content %}
+
+<style>
+    #chat-messages{
+        height: 400px;
+        overflow-y: auto;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <ul class="list-group list-group-flush">
+
+                <li class="list-group-item"><strong>Ticket #:</strong> {{inc.ticket}}</li>
+                <li class="list-group-item"><strong>Category:</strong> {{inc.category}}</li>
+                <li class="list-group-item"><strong>Status: </strong>{{inc.status}}</li>
+                <li class="list-group-item"><strong>Deskside Engr.: </strong>{{inc.assigned}}</li>
+                <li class="list-group-item"><strong>Last Updated: </strong>{{inc.updated | timesince}}</li>
+                <li class="list-group-item"><strong>Date Created: </strong>{{inc.created | timesince}}</li>
+            </ul>
+        </div>
+        <div class="col-sm-9">
+            <h5>Ticket Description: </h5>
+            <small>{{inc.description}}</small>
+            <br/><br/>
+            <h5>
+                Ticket Update:
+            </h5>
+            <small>{{inc.ticketUpdate}}</small><br/>
+            {% for updates in updated %}
+                 {{updates.chat}}
+
+            {% endfor %}
+        </div>
+    </div>
+    <br/>
+
+    <div class="row">
+        <div class="col-sm-3">
+             <div>
+                <form action="" class="flex" method="post">
+                    {% csrf_token %}
+                    <input class="btn btn-light" id="chat-message-input" name="chat" placeholder="Leave your message here..."
+                           type="text" style="height: 100px; width: 250px">
+                    <button class="btn btn-info" id="chat-message-submit"
+                    style="height: 0px; width: 10px" hidden>Submit
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+
+            <div id="chat-messages" style="max-height:100rem;">
+
+                {% for m in message %}
+                    <div class="card text-bg-primary mb-3" style="max-width: 23rem;">
+                        <div class="card-header"><b>{{ m.user.username }}</b> &nbsp; - {{ m.created | timesince }} ago </div>
+                              <div class="card-body">
+                                <p class="card-text">{{m.chat}}</p>
+                              </div>
+                    </div>
+
+                {% endfor %}
+
+            </div>
+        </div> <!-- End of div -->
+    </div> <! -- End of div row on second row -->
+</div>
+{% endblock %}
+    <h1>bellow</h1>
+{% block scripts %}
+        {{ inc.pk|json_script:"json-roomname" }}
+        {{ request.user.username|json_script:"json-username" }}
+
+        <script>
+            const roomName = JSON.parse(document.getElementById('json-roomname').textContent);
+            const userName = JSON.parse(document.getElementById('json-username').textContent);
+            const chatSocket = new WebSocket(
+                'ws://'
+                + window.location.host
+                + '/ws/'
+                + roomName
+                + '/'
+            );
+
+            chatSocket.onclose = function(e) {
+                console.log('onclose')
+            }
+
+            chatSocket.onmessage = function(e) {
+                const data = JSON.parse(e.data);
+
+                            if (data.message) {
+                                document.querySelector('#chat-messages').innerHTML += ('<b>' + data.username + '</b>: ' + data.message + '<br>');
+                            } else {
+                                alert('The message was empty!')
+                            }
+
+                            scrollToBottom();
+                        };
+
+                        document.querySelector('#chat-message-input').focus();
+
+                        document.querySelector('#chat-message-submit').onclick = function(e) {
+                            e.preventDefault()
+
+                            const messageInputDom = document.querySelector('#chat-message-input');
+                            const message = messageInputDom.value;
+
+                            console.log({
+                                'message': message,
+                                'username': userName,
+                                'room': roomName
+                            })
+
+                            chatSocket.send(JSON.stringify({
+                                'message': message,
+                                'username': userName,
+                                'room': roomName
+                            }));
+
+                            messageInputDom.value = '';
+
+                            return false
+                        };
+
+                        /**
+                        * A function for finding the messages element, and scroll to the bottom of it.
+                        */
+                        function scrollToBottom() {
+                            let objDiv = document.getElementById("chat-messages");
+                            objDiv.scrollTop = objDiv.scrollHeight;
+                        }
+
+                        // Add this below the function to trigger the scroll on load.
+                        scrollToBottom();
+
+        </script>
+
+
+{% endblock %}

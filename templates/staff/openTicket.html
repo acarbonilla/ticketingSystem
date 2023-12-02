@@ -1,0 +1,72 @@
+{% extends 'account/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+
+        <div class="col-sm-12">
+            <button class="btn btn-primary position-relative" type="button">
+                Open Ticket
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    {{addTicket}}</span>
+            </button>
+            <hr>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">Ticket #</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Created On</th>
+                    <th scope="col">Assigned To</th>
+                </tr>
+                </thead>
+                {% for ticket in incUserView %}
+                <tbody>
+                <tr>
+                    <td>
+                        <a class="btn btn-secondary" href="{% url 'incDetails' ticket.ticket %}">
+                            {{ticket.ticket}}
+                        </a>
+                    </td>
+                    <td>{{ticket.category}}</td>
+                    <td>{{ticket.created | timesince }}</td>
+                    <td>{{ticket.assigned}}</td>
+                    <td>
+                        <a class="btn btn-secondary" href="{% url 'sdINC' ticket.ticket %}">
+                            Update
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+                {% endfor %}
+
+                {% for ticket in srUserView %}
+                <tbody>
+                <tr>
+
+                    <td>
+                        <a class="btn btn-secondary" href="{% url 'srDetails' ticket.tickets %}">
+                            {{ticket.tickets}}
+                        </a>
+                    </td>
+                    <td>{{ticket.category}}</td>
+
+                    <td>{{ticket.created | timesince}}</td>
+                         <td>{{ticket.assigned}}</td>
+
+                    <td>
+                        <a class="btn btn-secondary" href="{% url 'sdSR' ticket.tickets %}">
+                            Update
+                        </a>
+                    </td>
+
+                </tr>
+                </tbody>
+                {% endfor %}
+            </table>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
