@@ -102,12 +102,12 @@ CHANNEL_LAYERS = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ticketings',
-        'HOST': 'localhost',
-        'PORT': '3306',
-        'USER': 'root',
-        'PASSWORD': 'XiaCarb@23',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'EG3AEDbg4AeEg4EccC4BCFGBdE4D-a14',
+        'HOST': 'viaduct.proxy.rlwy.net',
+        'PORT': '58279',
     }
 }
 
