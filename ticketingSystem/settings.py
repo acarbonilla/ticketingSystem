@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-4siu7)#i0jl7=s3_!8)h2zrmr-l4omz_^o_-^&f_@_y4-89i3e
 DEBUG = True
 
 # ALLOWED_HOSTS = ['0.0.0.0']
-ALLOWED_HOST = ['0.0.0.0', 'django-server-production-f47f.up.railway.app']
+ALLOWED_HOST = ['0.0.0.0', 'ticketingsystem-production-0800.up.railway.app']
 # Application definition
 
 INSTALLED_APPS = [
