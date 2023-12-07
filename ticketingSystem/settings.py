@@ -204,7 +204,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 # Railway configuration
-CSRF_TRUSTED_ORIGINS = ['xiasticket-production-1a6e.up.railway.app']
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+# CSRF_TRUSTED_ORIGINS = ['xiasticket-production-1a6e.up.railway.app']
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
 
