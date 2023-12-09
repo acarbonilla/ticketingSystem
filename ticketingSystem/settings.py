@@ -24,8 +24,8 @@ SECRET_KEY = 'django-insecure-4siu7)#i0jl7=s3_!8)h2zrmr-l4omz_^o_-^&f_@_y4-89i3e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+ALLOWED_HOSTS = ['0.0.0.0']
 # ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
@@ -204,7 +204,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 # Railway configuration
-CSRF_TRUSTED_ORIGINS = ['ticketingsystem-production-770e.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://ticketingsystem-production-e240.up.railway.app/']
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
