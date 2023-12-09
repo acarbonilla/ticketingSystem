@@ -83,6 +83,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
 
                 # `allauth` needs this from django
+                # source for social auth:  https://docs.allauth.org/en/latest/installation/quickstart.html
                 'django.template.context_processors.request',
             ],
         },
@@ -161,6 +162,7 @@ STORAGES = {
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Under this comment is the gmail and facebook login
+# Source: https://www.youtube.com/watch?v=RyB_wdEZhOw&ab_channel=CodeWithStein
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
@@ -169,7 +171,7 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-SITE_ID = 1
+SITE_ID = 2
 
 # client_Id = 338646548611-s7af0p346917v67votf9r2u7qtj0siom.apps.googleusercontent.com
 # client_secret = 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
