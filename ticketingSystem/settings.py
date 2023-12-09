@@ -171,7 +171,7 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
-SITE_ID = 1
+SITE_ID = 2
 
 # client_Id = 338646548611-s7af0p346917v67votf9r2u7qtj0siom.apps.googleusercontent.com
 # client_secret = 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
