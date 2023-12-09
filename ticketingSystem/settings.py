@@ -204,7 +204,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 # Railway configuration
-CSRF_TRUSTED_ORIGINS = ['https://ticketingsystem-production-e240.up.railway.app/accounts/login/']
+CSRF_TRUSTED_ORIGINS = ['https://*.ticketingsystem.up.railway.app/']
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
