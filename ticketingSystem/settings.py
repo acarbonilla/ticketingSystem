@@ -203,8 +203,11 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
 
+"""
 # Railway configuration
 CSRF_TRUSTED_ORIGINS = ['https://ticketingsystem-production-e240.up.railway.app/']
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+"""
+
 
