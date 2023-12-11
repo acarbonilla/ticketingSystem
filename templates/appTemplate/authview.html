@@ -2,7 +2,7 @@
 {% load mathfilters %}
 
 {% block content %}
-<meta http-equiv="refresh" content="10">
+<meta content="10" http-equiv="refresh">
 <style>
     #info{
      width: 15rem;
@@ -23,6 +23,7 @@
     text-decoration: none;
     color: 120022;
     }
+
 
 </style>
 
@@ -54,8 +55,6 @@
                         {% if ds %}
                         {{monthDeskside}}
                         {% endif %}
-
-
                     </h3>
                 </div>
                 &nbsp; &nbsp;
@@ -148,9 +147,9 @@
                                 <a class="btn btn-primary" href="{% url 'staff' %}">
                                     Open Ticket
                                 </a>
-                                  {% if openTicket == 0 %}
-                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                                        style="display:none;">
+                                {% if openTicket == 0 %}
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                      style="display:none;">
                                         {{openTicket}}
                                         </span>
                                 {%else%}
@@ -165,8 +164,8 @@
                                     Closed Ticket
                                 </a>
                                 {% if closedDayCount == 0 %}
-                                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                                        style="display:none;">
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                      style="display:none;">
                                         {{closedDayCount}}
                                         </span>
                                 {%else%}
