@@ -20,12 +20,12 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('', include('baseApp.urls')),
-    path('accounts/', include('allauth.urls')),
+    path('', include('allauth.urls')),
     path('home/', TemplateView.as_view(template_name='dashboard/home.html'), name='home'),
     path('admin/', admin.site.urls),
     path('record/', include('staff.urls')),
     path('deskside/', include('deskside.urls')),
-    path('', include('member.urls')),
+    path('member/', include('member.urls')),
     path('api/', include('ticketingAPI.urls')),
     path('api-auth/', include('rest_framework.urls'))
 ]
