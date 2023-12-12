@@ -123,37 +123,4 @@ class SRMessage(models.Model):
         return f'{self.sr} - {self.user}'
 
 
-# This is for Experimentation
-
-class PersonQuerySet(models.QuerySet):
-    def authors(self):
-        return self.filter(role="A")
-
-    def editors(self):
-        return self.filter(role="E")
-
-
-class PersonManager(models.Manager):
-    def get_queryset(self):
-        return PersonQuerySet(self.model, using=self._db)
-
-    def authors(self):
-        return self.get_queryset().authors()
-
-    def editors(self):
-        return self.get_queryset().editors()
-
-
-class Person(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    role = models.CharField(
-        max_length=1, choices=[("A", "Author"), ("E", "Editor")]
-    )
-
-    people = PersonManager()
-
-    def __str__(self):
-        return f'{self.first_name} {self.last_name}'
 

@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_protect
 
 from baseApp.forms import INCTicketForm, SRTicketForm, INCTicketEditForm, SRTicketEditForm
-from baseApp.models import INCTicket, SRTicket, Advisory, Message, SRMessage, INCChoices, SRChoices, Person
+from baseApp.models import INCTicket, SRTicket, Advisory, Message, SRMessage, INCChoices, SRChoices
 
 # This is for calling from viewsCall folder
 from baseApp.viewsCall.cal import skeleton, get_week_format, deadline
@@ -152,9 +152,6 @@ def authView(request):
     # this is for experimentation
     expired = deadline()
     event = ""
-
-    # Experimentation for manager
-    ab = Person.people.editors().filter(user__id=request.user.id)
 
     content = {
         # This is for grouping and Advisory
