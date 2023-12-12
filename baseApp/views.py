@@ -171,7 +171,7 @@ def authView(request):
         'desksideRate': desksideRate, 'a': a, 'b': b,
 
         # Experiment(Used now at staff views/html)
-        'expired': expired, 'memberOpenTicket': memberOpenTicket, 'event': event, 'ab': ab,
+        'expired': expired, 'memberOpenTicket': memberOpenTicket, 'event': event,
 
         # This is for member non-staff personnel
         'memberINC': memberINC, 'memberSR': memberSR,
