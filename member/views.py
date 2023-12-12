@@ -24,10 +24,10 @@ def memberLogin(request):
             return redirect('memberLogin')
 
     else:
-        return render(request, 'forms/login.html', {})
+        return render(request, 'account/login.html', {})
 
 
 def sflogout(request):
     logout(request)
     # messages.success(request, "Successfully Logout.")
-    return redirect('memberLogin')
+    return redirect('home')
