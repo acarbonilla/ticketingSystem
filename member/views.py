@@ -30,5 +30,4 @@ def memberLogin(request):
 def sflogout(request):
     logout(request)
     # messages.success(request, "Successfully Logout.")
-
     return redirect('memberLogin')
