@@ -2,7 +2,7 @@ from django.urls import path
 from baseApp.views import homeView, authView, incForm, srForm, incEditForm, srEditForm, incDetails, srDetails
 
 urlpatterns = [
-    path('homeView', homeView, name='homeView'),
+    path('homeView/', homeView, name='homeView'),
     path('authView/', authView, name='authView'),
 
     # Form
