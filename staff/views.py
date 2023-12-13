@@ -87,7 +87,7 @@ def openTicket(request):
 @login_required(login_url='account_login')
 def closedTicket(request):
     # Service Desk only
-    sd = request.user.groups.filter(name="Service_Desk").filter(name="Deskside")
+    sd = request.user.groups.filter(name="Service_Desk").filter(name="Deskside_Support")
     if not sd:
         return redirect("authView")
 
