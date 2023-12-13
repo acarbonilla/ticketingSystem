@@ -86,14 +86,11 @@ def openTicket(request):
 # This is for All closed ticket,means all no filter on what month. Paginator on this way.
 @login_required(login_url='account_login')
 def closedTicket(request):
-    """
     # Service Desk only
     sd = request.user.groups.filter(name="Service_Desk")
     ds = request.user.groups.filter(name="Deskside_Support")
     if not sd and ds:
         return redirect("authView")
-
-    """
 
     # This is for experimental query
     start_date = datetime.date(2023, 6, 1)
@@ -123,7 +120,6 @@ def closedTicket(request):
     context = {'addTicket': addTicket, 'closedQuery': closedQuery,
                'SRClosedQuery': SRClosedQuery, 'june': june}
     return render(request, 'staff/closedTicket.html', context)
-
 
 
 # This is for EditINC and SR
