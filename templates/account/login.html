@@ -3,33 +3,41 @@
 {% load account socialaccount %}
 {% load crispy_forms_filters %}
 {% block head_title %}{% trans "Sign In" %}{% endblock %}
-
 {% block content %}
 
 <div class="container">
 
     <div class="row">
-        <div class="col-sm-6 mt-2"><br/><br/>
-            <h4 style="font-family:courier;
-text-align: justify; text-justify: inter-word">
-                I am developing this Ticketing System as my Portfolio for future use.
-                 Hoping this IT Ticketing System can help me to become a real web developer.
-                API and REACT can be added soon, for more friendly usability.
-            </h4>
+        <!--
+         <div class="col-sm-7">
+            <div class="col-sm-10">
+                 <h4 id="creator">
+                    I am developing this Ticketing System as my Portfolio for future use.
+                     Hoping this IT Ticketing System can help me to become a real web developer.
+                    API and REACT can be added soon, for more friendly usability.<br/><br/>
+                    Thanks, <br/>
+                    Alfredo Jr. T. Carbonilla
+                 </h4>
+            </div>
         </div>
-        <div class="col-sm-6 text-center">
-                <h1>Sign In</h1>
+        -->
+        <div class="col-sm-3">
+
+        </div>
+
+        <div class="col-sm-5 text-center" id="rcorners4">
                 {% get_providers as socialaccount_providers %}
                 {% if socialaccount_providers %}
                 <p>{% blocktrans with site.name as site_name %}Please sign in with one
-                    of your existing third party accounts.<br>Or, <a href="{{ signup_url }}">sign up</a>
+                    of your existing third party accounts.<br>Or, <a href="{{ signup_url }}" class="text-info"
+                    style="text-decoration:none;">sign up</a>
                     for a {{ site_name }} account and sign in below:{% endblocktrans %}</p>
 
                 <div class="socialaccount_ballot">
                     <div class="socialaccount_providers">
                         {% include "socialaccount/snippets/provider_list.html" with process="login" %}
                     </div>
-                    <div class="login-or border-top border-bottom my-3">OR</div>
+                    <div class="login-or border-top border-bottom my-3" style="text-weight:bolder;">OR</div>
                 </div>
 
                 {% include "socialaccount/snippets/login_extra.html" %}
@@ -45,14 +53,17 @@ text-align: justify; text-justify: inter-word">
                         <input name="{{ redirect_field_name }}" type="hidden" value="{{ redirect_field_value }}"/>
                         {% endif %}
                         <div class="d-grid">
-                            <button class="primaryAction mt-3 btn btn-dark" type="submit">Sign In</button>
+                            <button class="primaryAction mt-3 btn btn-info text-white" type="submit">Sign In</button>
                             <br>
-                            <a class="button secondaryAction text-dark text-center"
+                            <a class="button secondaryAction text-info text-center" style="text-decoration:none;"
                                href="{% url 'account_reset_password' %}">
                                 Forgot Password</a>
                         </div>
                     </form>
                     <br/><br/>
+        </div>
+         <div class="col-sm-3">
+
         </div>
     </div>
 </div>
