@@ -197,7 +197,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 # source: https://www.youtube.com/watch?v=GQySb3W2feo&ab_channel=CodeBand
 
 
@@ -210,5 +210,14 @@ CSRF_TRUSTED_ORIGINS = ['https://*.ticketingsystem.up.railway.app/']
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
+
+# Email password reset
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'carbonillaalfredo@gmail.com'
+EMAIL_HOST_PASSWORD = 'XiaCarb@23'
 
 
