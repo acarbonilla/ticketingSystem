@@ -216,7 +216,8 @@ CSRF_COOKIE_SECURE = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.mail.yahoo.com'
 EMAIL_PORT = 465
-EMAIL_USE_TLS = True
+EMAIL_USE_TLS = False
+EMAIL_USE_SSL = True
 EMAIL_HOST_USER = 'carbonillaat@yahoo.com'
 EMAIL_HOST_PASSWORD = 'XiaCarb@23'
 
