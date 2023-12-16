@@ -8,6 +8,7 @@ from baseApp.viewsCall.cal import get_week_format
 from staff.forms import SdINCEditForm, SdSREditForm
 from datetime import datetime, timedelta
 import datetime
+from django.contrib.admin.views.decorators import staff_member_required
 
 
 # This is the dashboard for staff-Service Desk
@@ -44,9 +45,9 @@ def staff(request):
     dsTicketOpen = desksideINCCountOpen + desksideSRVCountOpen
 
     # Total count of tickets assigned
-    desksideINCCount = INCTicket.objects.filter(assigned__user__id=request.user.id, created__week=weekly)\
+    desksideINCCount = INCTicket.objects.filter(assigned__user__id=request.user.id, created__week=weekly) \
         .filter(status="Closed").count()
-    desksideSRVCount = SRTicket.objects.filter(assigned__user__id=request.user.id, created__week=weekly)\
+    desksideSRVCount = SRTicket.objects.filter(assigned__user__id=request.user.id, created__week=weekly) \
         .filter(status="Closed").count()
     dsTicketClosed = desksideSRVCount + desksideINCCount
 
@@ -84,14 +85,18 @@ def openTicket(request):
 
 
 # This is for All closed ticket,means all no filter on what month. Paginator on this way.
-@login_required(login_url='account_login')
-def closedTicket(request):
-    # Service Desk only
+# @login_required(login_url='account_login')
+"""
+  # Service Desk only
     sd = request.user.groups.filter(name="Service_Desk")
     ds = request.user.groups.filter(name="Deskside_Support")
     if not sd and ds:
         return redirect("authView")
+  """
 
+
+@staff_member_required
+def closedTicket(request):
     # This is for experimental query
     start_date = datetime.date(2023, 6, 1)
     end_date = datetime.date(2023, 6, 30)
