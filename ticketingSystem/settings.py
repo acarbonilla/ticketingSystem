@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
+# This is for hiding your sensitive account
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4siu7)#i0jl7=s3_!8)h2zrmr-l4omz_^o_-^&f_@_y4-89i3e'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -217,8 +221,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'carbonillaalfredo@gmail.com'
-EMAIL_HOST_PASSWORD = 'bcaa pvtf ltdl nxcm'
+EMAIL_HOST_USER = os.environ['carbonillaalfredo@gmail.com']
+EMAIL_HOST_PASSWORD = os.environ['bcaa pvtf ltdl nxcm']
 
-# source: https://myaccount.google.com/apppasswords?pli=1&rapt=AEjHL
-# 4PQLDSGlvfp1LIXa0aesIhevy6G9WCRzybwyVEIntPmLtetER6oU_gvXiXTGpwbYCY3D-iOwcpRrgtjvoiDwEA3-xVuW9HvjA-WIUuKbVgzZ1PYbrE
