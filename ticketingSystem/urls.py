@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', include('baseApp.urls')),
@@ -27,5 +28,7 @@ urlpatterns = [
     path('deskside/', include('deskside.urls')),
     path('member/', include('member.urls')),
     path('api/', include('ticketingAPI.urls')),
-    path('api-auth/', include('rest_framework.urls'))
+    path('api-auth/', include('rest_framework.urls')),
+    # This is for password reset
+    path('reset_password/', auth_views.PasswordResetView.as_view()),
 ]
