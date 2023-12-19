@@ -107,7 +107,7 @@ def closedTicket(request):
     closedQuery = INCTicket.objects.filter(
         Q(ticket__icontains=q) |
         Q(member__username__icontains=q) |
-        Q(assigned__fName__icontains=q),
+        Q(assigned__user__first_name__icontains=q),
         status="Closed", created__range=(start_date, end_date)
     ).order_by("-created")
 

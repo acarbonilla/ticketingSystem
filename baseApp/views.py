@@ -1,7 +1,8 @@
-from datetime import datetime, timedelta
+from datetime import timedelta
 from django.contrib.auth.decorators import login_required
-from django.db.models import Count
+# from django.db.models import Count
 from django.shortcuts import render, redirect
+# from datetime import datetime
 
 from django.views.decorators.csrf import csrf_protect
 
@@ -9,8 +10,10 @@ from baseApp.forms import INCTicketForm, SRTicketForm, INCTicketEditForm, SRTick
 from baseApp.models import INCTicket, SRTicket, Advisory, Message, SRMessage, INCChoices, SRChoices
 
 # This is for calling from viewsCall folder
-from baseApp.viewsCall.cal import skeleton, get_week_format, deadline
+from baseApp.viewsCall.cal import skeleton, deadline
 from baseApp.viewsCall.servicedesk import getAllOpenCount, getCloseDayCount
+from baseApp.viewsCall.cal import get_week_format
+from django.db.models import Count
 
 
 def homeView(request):
@@ -40,14 +43,14 @@ def authView(request):
 
     weekly = get_week_format()
     desksideINC = INCTicket.objects.values(
-        'assigned__fName', 'assigned__lName'
+        'assigned__user__first_name', 'assigned__user__last_name'
     ).annotate(
         incCount=Count('ticket'),
 
     ).filter(status="Closed", created__week=weekly)
 
     desksideSR = SRTicket.objects.values(
-        'assigned__fName', 'assigned__lName'
+        'assigned__user__first_name', 'assigned__user__last_name'
     ).annotate(
         srCounts=Count('tickets')
     ).filter(status="Closed", created__week=weekly)
@@ -82,7 +85,11 @@ def authView(request):
     monthTicket = incMonthticket + srMonthticket
 
     # This is for resolution rate
-    resoRate = round(float((allClosedMonthTicket / monthTicket) * 100))
+    if allClosedMonthTicket == 0 and monthTicket == 0:
+        resoRate = 0
+    else:
+        resoRate = round(float((allClosedMonthTicket / monthTicket) * 100))
+
     # End of Month report on the left side of page
 
     # This is for Deskside Report
@@ -153,6 +160,8 @@ def authView(request):
     expired = deadline()
     event = ""
 
+    # User availability
+
     content = {
         # This is for grouping and Advisory
         'sd': sd, 'ds': ds, 'advisory': advisory,
@@ -185,7 +194,6 @@ def authView(request):
 @login_required(login_url='account_login')
 def incForm(request):
     form = INCTicketForm(request.user, request.POST)
-
     if form.is_valid():
         ticket = form.save(commit=False)
         ticket.user = request.user
@@ -204,7 +212,6 @@ def incForm(request):
 @login_required(login_url='account_login')
 def srForm(request):
     form = SRTicketForm(request.user, request.POST)
-
     if form.is_valid():
         ticket = form.save(commit=False)
         ticket.user = request.user

@@ -13,22 +13,18 @@ def srTicket():
 
 class DeskSideEngr(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    fName = models.CharField(max_length=50, verbose_name="First Name")
-    lName = models.CharField(max_length=50)
     contact = models.IntegerField()
 
     def __str__(self):
-        return f'{self.fName} {self.lName}'
+        return f'{self.user.first_name} {self.user.last_name}'
 
 
 class ServiceDesk(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    fName = models.CharField(max_length=50)
-    lName = models.CharField(max_length=50)
     contact = models.IntegerField()
 
     def __str__(self):
-        return f'{self.fName} {self.lName}'
+        return f'{self.user.first_name} {self.user.last_name}'
 
 
 class INCChoices(models.Model):
@@ -55,6 +51,12 @@ class INCTicket(models.Model):
         choices=[("Open", "Open"), ("Closed", "Closed")],
         default="Open"
     )
+    severity = models.CharField(
+        max_length=10,
+        choices=[("LOW", "LOW"), ("HIGH", "HIGH")],
+        default="LOW",
+        blank=True, null=True
+    )
     assigned = models.ForeignKey(DeskSideEngr, on_delete=models.SET_NULL, null=True, blank=True)
     assignedBy = models.ForeignKey(ServiceDesk, on_delete=models.SET_NULL, null=True, blank=True)
     ticketUpdate = models.TextField(null=True, blank=True)
@@ -74,6 +76,12 @@ class SRTicket(models.Model):
         max_length=10,
         choices=[("Open", "Open"), ("Closed", "Closed")],
         default="Open"
+    )
+    severity = models.CharField(
+        max_length=10,
+        choices=[("LOW", "LOW"), ("HIGH", "HIGH")],
+        default="LOW",
+        blank=True, null=True
     )
     assigned = models.ForeignKey(DeskSideEngr, on_delete=models.SET_NULL, null=True, blank=True)
     assignedBy = models.ForeignKey(ServiceDesk, on_delete=models.SET_NULL, null=True, blank=True)
@@ -121,6 +129,3 @@ class SRMessage(models.Model):
 
     def __str__(self):
         return f'{self.sr} - {self.user}'
-
-
-

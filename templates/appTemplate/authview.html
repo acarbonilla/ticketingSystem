@@ -1,8 +1,7 @@
 {% extends 'account/base.html' %}
 {% load mathfilters %}
-
 {% block content %}
-<meta content="10" http-equiv="refresh">
+<meta content="60" http-equiv="refresh">
 <style>
     #info{
      width: 15rem;
@@ -28,345 +27,351 @@
 </style>
 
 <div class="container">
-
     <div class="row">
-        {% if user.is_staff %}
-        <div class="col-sm-5">
-            <div class="row mt-2">
-                <div class="card col-sm-5 pt-1 shadow p-3 mb-1 bg-body-tertiary rounded" id="info">
-                    <h5 class="card-title">All Issues</h5>
-                    <small class="card-subtitle  text-body-secondary mb-1"> Current Month</small>
-                    <h3 class="card-subtitle text-center text-primary">
-                        <!-- Giving Condition so I can have only one framework -->
-                        {% if sd %}
-                        <b>
-                            {{monthTicket}}
-                        </b>
-                        {% endif %}
+        {% if user.first_name == ''%}
+            <p>Need to fill up your full name:</p>
+                {% else %}
+                {% if user.is_staff %}
 
-                        {% if ds %}
-                        {{monthDeskside}}
-                        {% endif %}
-                    </h3>
-                </div>
-                &nbsp; &nbsp;
-                <div class="card col-sm-5 pt-1 shadow p-3 mb-1 bg-body-tertiary rounded" id="info">
-                    <h5 class="card-title">High Priority Issues</h5>
-                    <small class="card-subtitle text-body-secondary mb-1"> Current Month</small>
-                    <h3 class="card-subtitle text-center text-primary"><b>0</b></h3>
-                </div>
-            </div>
+                <div class="col-sm-5">
+                    <div class="row mt-2">
+                        <div class="card col-sm-5 pt-1 shadow p-3 mb-1 bg-body-tertiary rounded" id="info">
+                            <h5 class="card-title">All Issues</h5>
+                            <small class="card-subtitle  text-body-secondary mb-1"> Current Month</small>
+                            <h3 class="card-subtitle text-center text-primary">
+                                <!-- Giving Condition so I can have only one framework -->
+                                {% if sd %}
+                                <b>
+                                    {{monthTicket}}
+                                </b>
+                                {% endif %}
 
-            <div class="row mt-2">
-                <div class="card col-sm-5 pt-1 shadow p-3 mb-1 bg-body-tertiary rounded" id="info">
-                    <h5 class="card-title">SR Ticket Closed</h5>
-                    <small class="card-subtitle  text-body-secondary mb-1"> Current Month</small>
-                    <h3 class="card-subtitle text-center text-primary">
-                        <!-- Giving Condition so I can have only one framework -->
-                        {% if sd %}
-                        <b>
-                            {{monthSRclose}}
-                        </b>
-                        {% elif ds %}
-                        {{dsSRClosed}}
-
-                        {% else %}
-
-                        {% endif %}
-                    </h3>
-                </div>
-                &nbsp; &nbsp;
-
-                <div class="card col-sm-5 pt-1 shadow p-3 mb-1 bg-body-tertiary rounded" id="info">
-                    <h5 class="card-title">Incident Ticket Closed</h5>
-                    <small class="card-subtitle text-body-secondary mb-1"> Current Month</small>
-                    <h3 class="card-subtitle text-center text-primary">
-                        <!-- Giving Condition so I can have only one framework -->
-                        {% if sd %}
-                        <b>
-                            {{monthINCclose}}
-                        </b>
-                        {% elif ds %}
-                        {{dsINCClosed}}
-
-                        {% else %}
-
-                        {% endif %}
-
-                    </h3>
-                </div>
-            </div>
-
-            <div class="row mt-2">
-                <div class="card col-sm-5 pt-1 shadow p-3 mb-1 bg-body-tertiary rounded" id="infoBottom1">
-                    <h5 class="card-title">Resolution Rate</h5>
-                    <small class="card-subtitle text-body-secondary mb-1"> Current Month</small>
-                    <h3 class="card-subtitle text-center text-primary">
-                        <!-- Giving Condition so I can have only one framework -->
-                        {% if sd %}
-                        <b>
-                            {{resoRate}}%
-                        </b>
-                        {% endif %}
-                        {% if ds %}
-                        <b>
-                            {{desksideRate}}%
-
-                            {%endif %}
-                        </b>
-                    </h3>
-                </div>
-            </div>
-
-            <div class="row mt-2">
-                <div class="card col-sm-5 shadow p-3 mb-1 bg-body-tertiary rounded" id="infoBottom2">
-                    <h5 class="card-title">Issue by type</h5>
-                    <small class="card-subtitle text-body-secondary mb-1"> Current Month</small>
-                    <h3 class="card-subtitle text-center text-primary"><b></b></h3>
-
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-7">
-            <div class="row mt-2">
-                <div class="card col-sm-12 pt-1 shadow p-3 mb-4 bg-body-tertiary rounded">
-                    <h5 class="card-title">iSupport as of today.</h5>
-                    <small class="card-subtitle  text-body-secondary mb-1"></small>
-                    <div class="row">
-                        <div class="col-sm-9">
-
-                            <button class="btn btn-primary position-relative" type="button">
-                                <a class="btn btn-primary" href="{% url 'staff' %}">
-                                    Open Ticket
-                                </a>
-                                {% if openTicket == 0 %}
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                                      style="display:none;">
-                                        {{openTicket}}
-                                        </span>
-                                {%else%}
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                        {{openTicket}}
-                                        </span>
-                                {%endif%}
-                            </button>
-                            &nbsp; &nbsp;
-                            <button class="btn btn-primary position-relative" type="button">
-                                <a class="btn btn-primary" href="#">
-                                    Closed Ticket
-                                </a>
-                                {% if closedDayCount == 0 %}
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                                      style="display:none;">
-                                        {{closedDayCount}}
-                                        </span>
-                                {%else%}
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                                        {{closedDayCount}}
-                                        </span>
-                                {%endif%}
-                            </button>
-                            &nbsp;&nbsp;
-
+                                {% if ds %}
+                                {{monthDeskside}}
+                                {% endif %}
+                            </h3>
                         </div>
-
-                        <div class="col-sm-2">
-
+                        &nbsp; &nbsp;
+                        <div class="card col-sm-5 pt-1 shadow p-3 mb-1 bg-body-tertiary rounded" id="info">
+                            <h5 class="card-title">High Priority Issues</h5>
+                            <small class="card-subtitle text-body-secondary mb-1"> Current Month</small>
+                            <h3 class="card-subtitle text-center text-primary"><b>0</b></h3>
                         </div>
-
                     </div>
 
+                    <div class="row mt-2">
+                        <div class="card col-sm-5 pt-1 shadow p-3 mb-1 bg-body-tertiary rounded" id="info">
+                            <h5 class="card-title">SR Ticket Closed</h5>
+                            <small class="card-subtitle  text-body-secondary mb-1"> Current Month</small>
+                            <h3 class="card-subtitle text-center text-primary">
+                                <!-- Giving Condition so I can have only one framework -->
+                                {% if sd %}
+                                <b>
+                                    {{monthSRclose}}
+                                </b>
+                                {% elif ds %}
+                                {{dsSRClosed}}
+
+                                {% else %}
+
+                                {% endif %}
+                            </h3>
+                        </div>
+                        &nbsp; &nbsp;
+
+                        <div class="card col-sm-5 pt-1 shadow p-3 mb-1 bg-body-tertiary rounded" id="info">
+                            <h5 class="card-title">Incident Ticket Closed</h5>
+                            <small class="card-subtitle text-body-secondary mb-1"> Current Month</small>
+                            <h3 class="card-subtitle text-center text-primary">
+                                <!-- Giving Condition so I can have only one framework -->
+                                {% if sd %}
+                                <b>
+                                    {{monthINCclose}}
+                                </b>
+                                {% elif ds %}
+                                {{dsINCClosed}}
+
+                                {% else %}
+
+                                {% endif %}
+
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="card col-sm-5 pt-1 shadow p-3 mb-1 bg-body-tertiary rounded" id="infoBottom1">
+                            <h5 class="card-title">Resolution Rate</h5>
+                            <small class="card-subtitle text-body-secondary mb-1"> Current Month</small>
+                            <h3 class="card-subtitle text-center text-primary">
+                                <!-- Giving Condition so I can have only one framework -->
+                                {% if sd %}
+                                <b>
+                                    {{resoRate}}%
+                                </b>
+                                {% endif %}
+                                {% if ds %}
+                                <b>
+                                    {{desksideRate}}%
+
+                                    {%endif %}
+                                </b>
+                            </h3>
+                        </div>
+                    </div>
+
+                    <div class="row mt-2">
+                        <div class="card col-sm-5 shadow p-3 mb-1 bg-body-tertiary rounded" id="infoBottom2">
+                            <h5 class="card-title">Available L2 Support</h5>
+
+                            <h3 class="card-subtitle text-center text-primary">
+                                <b>
+
+                                </b>
+                            </h3>
+
+                        </div>
+                    </div>
                 </div>
+                <aside class="col-sm-7">
+                    <div class="row mt-2">
+                        <div class="card col-sm-12 pt-1 shadow p-3 mb-4 bg-body-tertiary rounded">
+                            <h5 class="card-title">iSupport as of today.</h5>
+                            <small class="card-subtitle  text-body-secondary mb-1"></small>
+                            <div class="row">
+                                <div class="col-sm-9">
 
-                <div class="bg-body-tertiary rounded">
-                    <h3>Incident Ticket Closed (Week)</h3>
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th scope="col">DS Engr.</th>
-                            <th scope="col">Total</th>
+                                    <button class="btn btn-primary position-relative" type="button">
+                                        <a class="btn btn-primary" href="{% url 'staff' %}">
+                                            Open Ticket
+                                        </a>
+                                        {% if openTicket == 0 %}
+                                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                    {{openTicket}}
+                                                    </span>
+                                        {%else%}
+                                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                    {{openTicket}}
+                                                    </span>
+                                        {%endif%}
+                                    </button>
+                                    &nbsp; &nbsp;
+                                    <button class="btn btn-primary position-relative" type="button">
+                                        <a class="btn btn-primary" href="#">
+                                            Closed Ticket
+                                        </a>
+                                        {% if closedDayCount == 0 %}
+                                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                    {{closedDayCount}}
+                                                    </span>
+                                        {%else%}
+                                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                                    {{closedDayCount}}
+                                                    </span>
+                                        {%endif%}
+                                    </button>
+                                    &nbsp;&nbsp;
 
-                        </tr>
-                        </thead>
-                        {% for deskINC in desksideINC %}
-                        <tbody>
-                        <tr>
-                            <td>
-                                {{deskINC.assigned__fName}} {{deskINC.assigned__lName}}
-                            </td>
+                                </div>
 
-                            <td>{{deskINC.incCount}}</td>
-                        </tr>
+                                <div class="col-sm-2">
 
-                        </tbody>
+                                </div>
 
-                        {% endfor %}
-                    </table>
-                    <h3>Service Ticket Closed (Week)</h3>
-                    <table class="table table-hover">
-                        <thead>
-                        <tr>
-                            <th scope="col">DS Engr.</th>
-                            <th scope="col">Total</th>
+                            </div>
 
-                        </tr>
-                        </thead>
+                        </div>
 
-                        {% for desksr in desksideSR %}
-                        <tbody>
-                        <tr>
-                            <td>
-                                {{desksr.assigned__fName}} {{desksr.assigned__lName}}
-                            </td>
+                        <div class="bg-body-tertiary rounded">
+                            <h3>Incident Ticket Closed (Week)</h3>
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th scope="col">DS Engr.</th>
+                                    <th scope="col">Total</th>
 
-                            <td>{{desksr.srCounts}}</td>
-                        </tr>
-                        </tbody>
-                        {% endfor %}
-                    </table>
+                                </tr>
+                                </thead>
+                                {% for deskINC in desksideINC %}
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        {{deskINC.assigned__user__first_name}}
+                                        {{deskINC.assigned__user__last_name}}
+
+                                    </td>
+
+                                    <td>{{deskINC.incCount}}</td>
+                                </tr>
+
+                                </tbody>
+
+                                {% endfor %}
+                            </table>
+                            <h3>Service Ticket Closed (Week)</h3>
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th scope="col">DS Engr.</th>
+                                    <th scope="col">Total</th>
+
+                                </tr>
+                                </thead>
+
+                                {% for desksr in desksideSR %}
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        {{desksr.assigned__user__first_name}}
+                                        {{desksr.assigned__user__last_name}}
+                                    </td>
+
+                                    <td>{{desksr.srCounts}}</td>
+                                </tr>
+                                </tbody>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </aside>
+                {% endif %} <!-- End for staff user -->
+
+                <!-- This is for member/user only -->
+                {% if not user.is_staff %}
+                <div class="container mt-3">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <button class="btn btn-primary position-relative" type="button">
+                                Open Ticket
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                {{ memberMonthOpen}}</span>
+                            </button>
+                            <br/>
+                            <br/>
+                            <button class="btn btn-primary position-relative" type="button">
+                                Closed Ticket
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                {{memberMonthClosed}}</span>
+                            </button>
+
+                            <br/>
+
+                        </div>
+                        <div class="col-sm-4">
+                            <h4><a href="{% url 'srForm' %}" id="link">Service Request Support</a></h4>
+                            <small><strong>This request is for:</strong></small>
+                            <ol>
+                                {% for type in srChoices %}
+                                <li>{{type.name}}</li>
+                                {% endfor %}
+                            </ol>
+                        </div>
+
+                        <div class="col-sm-4">
+                            <h4><a href="{% url 'srForm' %}" id="link">Incident Request Support</a></h4>
+                            <small><strong>This request is for:</strong></small>
+                            <ol>
+                                {% for type in iChoices %}
+                                <li>{{type.name}}</li>
+                                {% endfor %}
+                            </ol>
+                        </div>
+                    </div> <!-- End of upper row non-staff member -->
+
+                    <!-- Start of lower row of non-staff member -->
+                    <div class="row mt-4">
+                        <div class="col-sm-3">
+
+                        </div>
+
+                        <div class="col-sm-8">
+                            <h3 class="text-primary">Open Ticket</h3>
+                            <table class="table table-hover mt-2 p-3">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Ticket #</th>
+                                    <th scope="col">Category</th>
+                                    <th scope="col">Created On</th>
+                                    <th scope="col">Expired On</th>
+                                    <th scope="col">Assigned To</th>
+                                    <th scope="col">Edit</th>
+
+                                </tr>
+                                </thead>
+                                {% for open in memberOpenTicket %}
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <a class="btn btn-secondary" href="{% url 'incDetails' open.ticket %}">
+                                            {{open.ticket}}
+                                        </a>
+                                    </td>
+
+                                    <td>
+                                        {{open.category}}
+                                    </td>
+
+                                    <td>
+                                        {{open.created}}
+                                    </td>
+
+                                    <td>
+                                        {{open.created |add:expireOn}}
+                                    </td>
+
+                                    <td>
+                                        {{open.assigned}}
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-secondary" href="{% url 'incEditForm' open.ticket %}">
+                                            Update
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                                {% endfor %}
+
+                                {% for open in memberOpenTicketSR %}
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <a class="btn btn-secondary" href="{% url 'srDetails' open.tickets %}">
+                                            {{open.tickets}}
+                                        </a>
+                                    </td>
+
+                                    <td>
+                                        {{open.category}}
+                                    </td>
+
+                                    <td>
+                                        {{open.created}}
+                                    </td>
+
+                                    <td>
+                                        {{open.created |add:expireOn}}
+                                    </td>
+
+                                    <td>
+                                        {{open.assigned}}
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-secondary" href="{% url 'srEditForm' open.tickets %}">
+                                            Update
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        {% endif %} <!-- End for staff user -->
-
-        <!-- This is for member/user only -->
-        {% if not user.is_staff %}
-        <div class="container mt-3">
-            <div class="row">
-                <div class="col-sm-4">
-                    <button class="btn btn-primary position-relative" type="button">
-                        Open Ticket
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        {{ memberMonthOpen}}</span>
-                    </button>
-                    <br/>
-                    <br/>
-                    <button class="btn btn-primary position-relative" type="button">
-                        Closed Ticket
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        {{memberMonthClosed}}</span>
-                    </button>
-
-                    <br/>
-
-                </div>
-                <div class="col-sm-4">
-                    <h4><a href="{% url 'srForm' %}" id="link">Service Request Support</a></h4>
-                    <small><strong>This request is for:</strong></small>
-                    <ol>
-                        {% for type in srChoices %}
-                        <li>{{type.name}}</li>
-                        {% endfor %}
-                    </ol>
-                </div>
-
-                <div class="col-sm-4">
-                    <h4><a href="{% url 'srForm' %}" id="link">Incident Request Support</a></h4>
-                    <small><strong>This request is for:</strong></small>
-                    <ol>
-                        {% for type in iChoices %}
-                        <li>{{type.name}}</li>
-                        {% endfor %}
-                    </ol>
-                </div>
-            </div> <!-- End of upper row non-staff member -->
-
-            <!-- Start of lower row of non-staff member -->
-            <div class="row mt-4">
-                <div class="col-sm-3">
-
-                </div>
-
-                <div class="col-sm-8">
-                    <h3 class="text-primary">Open Ticket</h3>
-                    <table class="table table-hover mt-2 p-3">
-                        <thead>
-                        <tr>
-                            <th scope="col">Ticket #</th>
-                            <th scope="col">Category</th>
-                            <th scope="col">Created On</th>
-                            <th scope="col">Expired On</th>
-                            <th scope="col">Assigned To</th>
-                            <th scope="col">Edit</th>
-
-                        </tr>
-                        </thead>
-                        {% for open in memberOpenTicket %}
-                        <tbody>
-                        <tr>
-                            <td>
-                                <a class="btn btn-secondary" href="{% url 'incDetails' open.ticket %}">
-                                    {{open.ticket}}
-                                </a>
-                            </td>
-
-                            <td>
-                                {{open.category}}
-                            </td>
-
-                            <td>
-                                {{open.created}}
-                            </td>
-
-                            <td>
-                                {{open.created |add:expireOn}}
-                            </td>
-
-                            <td>
-                                {{open.assigned}}
-                            </td>
-                            <td>
-                                <a class="btn btn-secondary" href="{% url 'incEditForm' open.ticket %}">
-                                    Update
-                                </a>
-                            </td>
-                        </tr>
-                        </tbody>
-                        {% endfor %}
-
-                        {% for open in memberOpenTicketSR %}
-                        <tbody>
-                        <tr>
-                            <td>
-                                <a class="btn btn-secondary" href="{% url 'srDetails' open.tickets %}">
-                                    {{open.tickets}}
-                                </a>
-                            </td>
-
-                            <td>
-                                {{open.category}}
-                            </td>
-
-                            <td>
-                                {{open.created}}
-                            </td>
-
-                            <td>
-                                {{open.created |add:expireOn}}
-                            </td>
-
-                            <td>
-                                {{open.assigned}}
-                            </td>
-                            <td>
-                                <a class="btn btn-secondary" href="{% url 'srEditForm' open.tickets %}">
-                                    Update
-                                </a>
-                            </td>
-                        </tr>
-                        </tbody>
-                        {% endfor %}
-                    </table>
-
-
-                </div>
-            </div>
-
-
-        </div>
+                {% endif %}
         {% endif %}
-
     </div>
+
 </div>
+
 {% endblock %}
 

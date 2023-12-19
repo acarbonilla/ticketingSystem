@@ -15,7 +15,7 @@
 
         </div>
         <div class="col-sm-6">
-            <h2 class="text-center">Update Incident Request Form</h2>
+            <h2 class="text-center">Update Incident Request Forms</h2>
             <form action="" method="POST">
                 {% csrf_token %}
                 <div class="input-group mb-3" id="hideme">
@@ -30,7 +30,7 @@
 
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon3">Description:</span>
-                    {% render_field form.description class="form-control"%}
+                    {% render_field form.description|append_attr:"readonly:readonly" class="form-control"%}
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon3">Status:</span>
@@ -38,8 +38,6 @@
                 </div>
 
                 {% if user.is_staff %}
-
-
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon3">Assigned To:</span>
                     {% render_field form.assigned class="form-select" id=""%}

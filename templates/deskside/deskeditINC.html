@@ -6,7 +6,11 @@
     background-color:orange;
     display:none;
     }
-
+    #description{
+     pointer-events: none;
+      border: 1px solid #eee;
+      padding: 20px;
+    }
 </style>
 
 <div class="container">
@@ -28,6 +32,10 @@
                     {% render_field form.category class="form-select"%}
                 </div>
 
+                <div class="input-group mb-3" id="hideme" >
+                    <span class="input-group-text" id="basic-addon3">Assigned To:</span>
+                    {% render_field form.assigned class="form-select"%}
+                </div>
 
                 {% if user.is_staff %}
 
@@ -36,14 +44,9 @@
                     {% render_field form.status class="form-select" id=""%}
                 </div>
 
-                 <div class="input-group mb-3" >
-                    <span class="input-group-text" id="basic-addon3">Assigned To:</span>
-                    {% render_field form.assigned class="form-select" id=""%}
-                </div>
-
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon3">Description:</span>
-                    {% render_field form.description class="form-control"%}
+                    {% render_field form.description|append_attr:"readonly:readonly" class="form-control"%}
                 </div>
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="basic-addon3">Update:</span>

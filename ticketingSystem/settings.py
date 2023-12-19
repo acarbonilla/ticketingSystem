@@ -49,7 +49,6 @@ INSTALLED_APPS = [
 
     'crispy_forms',
     'crispy_bootstrap4',
-
     'baseApp',
     'widget_tweaks',
     'staff',
@@ -195,7 +194,7 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 LOGIN_REDIRECT_URL = '/authView'
-LOGOUT_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/accounts/login'
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 

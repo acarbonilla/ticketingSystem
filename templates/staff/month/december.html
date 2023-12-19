@@ -52,7 +52,9 @@
                         <tbody>
                         <tr>
                             <td>{{ticket.member}}</td>
-                            <td>{{ticket.ticket}}</td>
+                            <td> <a class="btn btn-secondary" href="{% url 'incDetails' ticket.ticket %}">
+                            {{ticket.ticket}}
+                        </a></td>
                             <td>{{ticket.category}}</td>
                             <td>{{ticket.created }}</td>
                             <td>{{ticket.updated}}</td>
@@ -66,7 +68,9 @@
                     <tbody>
                     <tr>
                         <td>{{ticket.member}}</td>
-                        <td>{{ticket.tickets}}</td>
+                        <td><a class="btn btn-secondary" href="{% url 'srDetails' ticket.tickets %}">
+                            {{ticket.tickets}}
+                        </a></td>
                         <td>{{ticket.category}}</td>
                         <td>{{ticket.created}}</td>
                         <td>{{ticket.updated}}</td>

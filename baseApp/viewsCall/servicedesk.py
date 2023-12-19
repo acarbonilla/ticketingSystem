@@ -1,5 +1,4 @@
 from datetime import datetime
-
 from baseApp.models import INCTicket, SRTicket
 
 

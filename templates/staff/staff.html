@@ -1,16 +1,12 @@
 {% extends 'account/base.html' %}
 {% load mathfilters %}
 {% block content %}
-<meta http-equiv="refresh" content="10">
+<meta http-equiv="refresh" content="60">
 {% if user.is_staff%}
 <div class="container">
     <div class="row">
         <div class="col-sm-12 text-center">
-            <h5>Advisory:
-                {% for ad in advisory %}
-                {{ad.name}} {{ad.updated}}
-                {% endfor %}
-            </h5>
+
         </div>
 
     </div> <!-- End of Announcement -->
@@ -27,19 +23,18 @@
 
             <!-- This button is for Deskside counting -->
             {% if ds %}
-            <button class="btn btn-primary position-relative" type="button">
-                Ticket Assigned
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                         {{dsTicketOpen}} </span>
-            </button>
-          &nbsp; &nbsp;
-            <button class="btn btn-primary position-relative" type="button">
-                Ticket Closed Total
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                           {{dsTicketClosed}} </span>
-            </button>
+                <button class="btn btn-primary position-relative" type="button">
+                    Ticket Assigned
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                             {{dsTicketOpen}} </span>
+                </button>
+              &nbsp; &nbsp;
+                <button class="btn btn-primary position-relative" type="button">
+                    Ticket Closed Total
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                               {{dsTicketClosed}} </span>
+                </button>
             {% endif %}
-
             <table class="table table-hover">
                 <thead>
                 <tr>
@@ -51,28 +46,27 @@
                     <th scope="col">Created By</th>
                 </tr>
                 </thead>
-                {% if sd %}
-                {% for ticket in incUserView %}
-                <tbody>
-                <tr>
-                    <td>
-                        <a class="btn btn-secondary" href="{% url 'incDetails' ticket.ticket %}">
-                            {{ticket.ticket}}
-                        </a>
-                    </td>
-                    <td>{{ticket.category}}</td>
-                    <td>{{ticket.created}}</td>
-                    <td>{{ticket.created |add:expireOn}}</td>
-                    <td>{{ticket.assigned }}</td>
-                    <td>{{ticket.member }}</td>
-                    <td>
-                        <a class="btn btn-secondary" href="{% url 'sdINC' ticket.ticket %}">
-                            Update
-                        </a>
-                    </td>
-
-                </tr>
-                </tbody>
+                {% if sd%}
+                    {% for ticket in incUserView %}
+                    <tbody>
+                    <tr>
+                        <td>
+                            <a class="btn btn-secondary" href="{% url 'incDetails' ticket.ticket %}">
+                                {{ticket.ticket}}
+                            </a>
+                        </td>
+                        <td>{{ticket.category}}</td>
+                        <td>{{ticket.created}}</td>
+                        <td>{{ticket.created |add:expireOn}}</td>
+                        <td>{{ticket.assigned }}</td>
+                        <td>{{ticket.member }}</td>
+                        <td>
+                            <a class="btn btn-secondary" href="{% url 'sdINC' ticket.ticket %}">
+                                Update
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
                 {% endfor %}
 
                 {% for ticket in srUserView %}
