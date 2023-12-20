@@ -54,15 +54,13 @@
         <div class="col-sm-6">
 
             <div id="chat-messages" style="max-height:100rem;">
-
                 {% for m in message %}
                     <div class="card text-bg-primary mb-3" style="max-width: 23rem;">
                         <div class="card-header"><b>{{ m.user.username }}</b> &nbsp; - {{ m.created | timesince }} ago </div>
-                              <div class="card-body">
-                                <p class="card-text">{{m.chat}}</p>
-                              </div>
+                          <div class="card-body">
+                            <p class="card-text">{{m.chat}}</p>
+                          </div>
                     </div>
-
                 {% endfor %}
 
             </div>
@@ -79,9 +77,9 @@
             const roomName = JSON.parse(document.getElementById('json-roomname').textContent);
             const userName = JSON.parse(document.getElementById('json-username').textContent);
             const chatSocket = new WebSocket(
-                'ws://'
+                'wss://'
                 + window.location.host
-                + '/ws/'
+                + '/wss/'
                 + roomName
                 + '/'
             );
@@ -92,51 +90,50 @@
 
             chatSocket.onmessage = function(e) {
                 const data = JSON.parse(e.data);
+                if (data.message) {
+                    document.querySelector('#chat-messages').innerHTML += ('<b>' + data.username + '</b>: ' + data.message + '<br>');
+                } else {
+                    alert('The message was empty!')
+                }
 
-                            if (data.message) {
-                                document.querySelector('#chat-messages').innerHTML += ('<b>' + data.username + '</b>: ' + data.message + '<br>');
-                            } else {
-                                alert('The message was empty!')
-                            }
+                scrollToBottom();
+            };
 
-                            scrollToBottom();
-                        };
+            document.querySelector('#chat-message-input').focus();
 
-                        document.querySelector('#chat-message-input').focus();
+            document.querySelector('#chat-message-submit').onclick = function(e) {
+                e.preventDefault()
 
-                        document.querySelector('#chat-message-submit').onclick = function(e) {
-                            e.preventDefault()
+                const messageInputDom = document.querySelector('#chat-message-input');
+                const message = messageInputDom.value;
 
-                            const messageInputDom = document.querySelector('#chat-message-input');
-                            const message = messageInputDom.value;
+                console.log({
+                    'message': message,
+                    'username': userName,
+                    'room': roomName
+                })
 
-                            console.log({
-                                'message': message,
-                                'username': userName,
-                                'room': roomName
-                            })
+                chatSocket.send(JSON.stringify({
+                    'message': message,
+                    'username': userName,
+                    'room': roomName
+                }));
 
-                            chatSocket.send(JSON.stringify({
-                                'message': message,
-                                'username': userName,
-                                'room': roomName
-                            }));
+                messageInputDom.value = '';
 
-                            messageInputDom.value = '';
+                return false
+            };
 
-                            return false
-                        };
+            /**
+            * A function for finding the messages element, and scroll to the bottom of it.
+            */
+            function scrollToBottom() {
+                let objDiv = document.getElementById("chat-messages");
+                objDiv.scrollTop = objDiv.scrollHeight;
+            }
 
-                        /**
-                        * A function for finding the messages element, and scroll to the bottom of it.
-                        */
-                        function scrollToBottom() {
-                            let objDiv = document.getElementById("chat-messages");
-                            objDiv.scrollTop = objDiv.scrollHeight;
-                        }
-
-                        // Add this below the function to trigger the scroll on load.
-                        scrollToBottom();
+            // Add this below the function to trigger the scroll on load.
+            scrollToBottom();
 
         </script>
 

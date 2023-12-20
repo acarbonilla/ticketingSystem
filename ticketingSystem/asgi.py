@@ -9,7 +9,7 @@ import baseApp.routing
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ticketingSystem.settings')
 
 application = ProtocolTypeRouter({
-    "http": get_asgi_application(),
+    "https": get_asgi_application(),
     "websocket": AuthMiddlewareStack(
         URLRouter(
             baseApp.routing.websocket_urlpatterns
