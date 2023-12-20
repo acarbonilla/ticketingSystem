@@ -5,7 +5,7 @@
   },
   "deploy": {
     "numReplicas": 1,
-    "startCommand": "daphne 'ticketingSystem.asgi'",
+    "startCommand": "gunicorn 'ticketingSystem.wsgi'",
     "sleepApplication": false,
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10
