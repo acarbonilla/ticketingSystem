@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'staff',
     'deskside',
     'channels',
+    'daphne',
     'mathfilters',
     'rest_framework',
     'ticketingAPI',
