@@ -106,6 +106,7 @@ env.bak/
 venv.bak/
 notes/
 venv/
+ticketingAPI/
 
 # mkdocs documentation
 /site
