@@ -1,6 +1,8 @@
 {% extends 'account/base.html' %}
 {% load mathfilters %}
+{% block title %} System Information {% endblock %}
 {% block content %}
+
 <meta content="60" http-equiv="refresh">
 <style>
     #info{
@@ -32,7 +34,6 @@
             <p>Need to fill up your full name:</p>
                 {% else %}
                 {% if user.is_staff %}
-
                 <div class="col-sm-5">
                     <div class="row mt-2">
                         <div class="card col-sm-5 pt-1 shadow p-3 mb-1 bg-body-tertiary rounded" id="info">

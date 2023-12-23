@@ -18,7 +18,7 @@ class INCTicketForm(forms.ModelForm):
     def __init__(self, user, *args, **kwargs):
         super(INCTicketForm, self).__init__(*args, **kwargs)
         if not user.is_staff:
-            self.fields['member'].queryset = User.objects.filter(id=user.id)
+            self.fields['member'].queryset = User.objects.filter(username=user.username)
 
 
 class INCTicketEditForm(forms.ModelForm):
