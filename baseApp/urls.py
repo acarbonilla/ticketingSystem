@@ -16,6 +16,4 @@ urlpatterns = [
     # Details
     path('incDetails/<str:pk>/', incDetails, name='incDetails'),
     path('srDetails/<str:pk>/', srDetails, name='srDetails'),
-
 ]
-

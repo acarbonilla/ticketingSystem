@@ -3,7 +3,7 @@ import json
 from django.contrib.auth.models import User
 from channels.generic.websocket import AsyncWebsocketConsumer
 from asgiref.sync import sync_to_async
-from django.views.decorators.csrf import csrf_protect
+# from django.views.decorators.csrf import csrf_protect
 
 from .models import INCTicket, Message, SRTicket, SRMessage
 
@@ -120,7 +120,6 @@ class ChatConsumer(AsyncWebsocketConsumer):
             'message': message,
             'username': username
         }))
-
 
     @sync_to_async
     def save_message(self, username, room, message):

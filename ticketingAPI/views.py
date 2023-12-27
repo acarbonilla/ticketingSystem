@@ -1,14 +1,11 @@
 from django.contrib.auth.models import User
-from django.views.decorators.csrf import csrf_exempt
-
 from baseApp.models import INCTicket, SRTicket
 from baseApp.viewsCall.cal import skeleton
 from .serializers import PostSerializer, IncidentSerializer, SRSerializer
-from rest_framework import status, generics
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from rest_framework.parsers import JSONParser
-from django.http import HttpResponse, JsonResponse
+
 
 skeletons = skeleton()
 

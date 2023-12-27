@@ -11,4 +11,3 @@ admin.site.register(SRChoices)
 admin.site.register(Advisory)
 admin.site.register(Message)
 admin.site.register(SRMessage)
-

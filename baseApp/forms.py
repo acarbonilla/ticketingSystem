@@ -50,5 +50,3 @@ class SRTicketEditForm(forms.ModelForm):
     def __init__(self, user, *args, **kwargs):
         super(SRTicketEditForm, self).__init__(*args, **kwargs)
         self.fields['member'].queryset = User.objects.filter(id=user.id)
-
-

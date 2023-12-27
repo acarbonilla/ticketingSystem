@@ -38,6 +38,3 @@ def deskSR(request, pk):
     deskside = DeskSideEngr.objects.filter(user__id=request.user.id)
     context = {'form': form, "deskside": deskside}
     return render(request, 'deskside/deskeditSR.html', context)
-
-
-

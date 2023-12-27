@@ -1,13 +1,10 @@
 from django.contrib.auth.decorators import login_required
-
 from django.db.models import Q
 from django.shortcuts import render, redirect
-
 from baseApp.models import INCTicket, SRTicket, Advisory
 from baseApp.viewsCall.cal import get_week_format
 from staff.forms import SdINCEditForm, SdSREditForm
 from datetime import datetime, timedelta
-import datetime
 from django.contrib.admin.views.decorators import staff_member_required
 
 

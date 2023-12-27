@@ -27,4 +27,3 @@ def getCloseDayCount():
     i = getINC().filter(status="Closed").filter(updated=datetime.today()).count()
     sr = getSR().filter(status="Closed").filter(updated=datetime.today()).count()
     return i + sr
-

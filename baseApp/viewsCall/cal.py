@@ -46,4 +46,3 @@ def deadline():
     three_days = datetime.today() + timedelta(days=3)
     dated = INCTicket.objects.filter(created__gte=three_days, status="Open")
     return dated
-

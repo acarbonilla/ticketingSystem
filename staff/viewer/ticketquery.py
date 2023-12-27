@@ -23,6 +23,3 @@ def getINC(self):
 def getSR(self):
     self.sr = s
     return self.sr
-
-
-

@@ -6,4 +6,3 @@ urlpatterns = [
     path('deskINC/<str:pk>', deskINC, name='deskINC'),
     path('deskSR/<str:pk>', deskSR, name='deskSR'),
 ]
-

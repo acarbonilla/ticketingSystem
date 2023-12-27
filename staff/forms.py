@@ -14,4 +14,3 @@ class SdSREditForm(forms.ModelForm):
     class Meta:
         model = SRTicket
         fields = '__all__'
-

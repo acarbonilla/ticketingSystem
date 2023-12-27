@@ -79,7 +79,6 @@ def august(request):
     return render(request, 'staff/month/august.html', context)
 
 
-
 @login_required(login_url='account_login')
 def september(request):
     # Service Desk only
@@ -127,7 +126,6 @@ def october(request):
     # This is for experimental query
     start_date = datetime.date(2023, 10, 1)
     end_date = datetime.date(2023, 10, 30)
-
     # This is for searching
     q = request.GET.get('oct') if request.GET.get('oct') is not None else ''
     closedQuery = INCTicket.objects.filter(

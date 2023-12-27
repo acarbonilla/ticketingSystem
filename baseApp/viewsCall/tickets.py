@@ -21,5 +21,3 @@ class Ticket:
 i = INCTicket.objects.all()
 s = SRTicket.objects.all()
 incTicket = Ticket(i, s)
-
-

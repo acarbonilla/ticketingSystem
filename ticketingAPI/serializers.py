@@ -20,4 +20,3 @@ class SRSerializer(serializers.ModelSerializer):
     class Meta:
         model = SRTicket
         fields = ('tickets', 'status', 'created', 'description')
-
