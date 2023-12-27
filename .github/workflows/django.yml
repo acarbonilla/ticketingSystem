@@ -27,28 +27,17 @@ jobs:
         pip install -r requirements.txt
 
 
-sast_scan:
- name: Run Bandit Scan
- runs-on: ubuntu-latest
+    - name: Run Bandit Scan
+      runs-on: ubuntu-latest
+    - name: Install Bandit
+      run: pip install bandit
 
- steps:
- - name: Checkout code
-   uses: actions/checkout@v2
+    - name: Run Bandit Scan
+      run: bandit -ll -ii -r . -f json -o bandit-report.json
 
- - name: Set up Python
-   uses: actions/setup-python@v2
-   with:
-     python-version: 3.8
-
- - name: Install Bandit
-   run: pip install bandit
-
- - name: Run Bandit Scan
-   run: bandit -ll -ii -r . -f json -o bandit-report.json
-
- - name: Upload Artifact
-   uses: actions/upload-artifact@v3
-   if: always()
-   with:
-    name: bandit-findings
-    path: bandit-report.json
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+       name: bandit-findings
+       path: bandit-report.json
