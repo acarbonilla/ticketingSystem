@@ -27,6 +27,7 @@ jobs:
         pip install -r requirements.txt
    
 sast_scan:
+  build:
    name: Run Bandit Scan
    runs-on: ubuntu-latest
 
