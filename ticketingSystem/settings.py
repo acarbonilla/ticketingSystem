@@ -1,26 +1,20 @@
 import os
 from pathlib import Path
-import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-env = environ.Env(
-    # set casting, default value
-    DEBUG=(bool, False)
-)
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
-# Take environment variables from .env file
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'django-insecure-4siu7)#i0jl7=s3_!8)h2zrmr-l4omz_^o_-^&f_@_y4-89i3e'
 
-# False if not in os.environ because of casting above
-DEBUG = env('DEBUG')
-
-# Raises Django's ImproperlyConfigured
-# exception if SECRET_KEY not in os.environ
-SECRET_KEY = env('SECRET_KEY')
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
+# Application definition
 
 INSTALLED_APPS = [
     'channels',
@@ -88,9 +82,12 @@ WSGI_APPLICATION = 'ticketingSystem.wsgi.application'
 ASGI_APPLICATION = 'ticketingSystem.asgi.application'
 
 CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels.layers.InMemoryChannelLayer'
-    }
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("redis-server-name", 6379)],
+        },
+    },
 }
 
 # Database
@@ -191,6 +188,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
+
 # source: https://www.youtube.com/watch?v=GQySb3W2feo&ab_channel=CodeBand
 
 
@@ -203,6 +201,7 @@ CSRF_TRUSTED_ORIGINS = ['https://*.ticketingsystem.up.railway.app/']
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
+
 # Email password reset
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -211,3 +210,4 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'carbonillaalfredo@gmail.com'
 EMAIL_HOST_PASSWORD = 'bcaa pvtf ltdl nxcm'
+
