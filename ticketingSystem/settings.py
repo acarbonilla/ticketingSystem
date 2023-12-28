@@ -14,7 +14,7 @@ load_dotenv()
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # ALLOWED_HOSTS = ['0.0.0.0', 'ticketingsystem-production-e240.up.railway.app/']
 ALLOWED_HOSTS = ['*']
@@ -100,11 +100,11 @@ CHANNEL_LAYERS = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'railway',
-        'USER': 'postgres',
-        'PASSWORD': '*33Efec1dbe1*1B6egc1e-6a4aB346c2',
-        'HOST': 'viaduct.proxy.rlwy.net',
-        'PORT': '40753',
+        'NAME': os.getenv('NAME'),
+        'USER': os.getenv('USER'),
+        'PASSWORD': os.getenv('PASSWORD'),
+        'HOST': os.getenv('HOST'),
+        'PORT': os.getenv('PORT'),
     }
 }
 
