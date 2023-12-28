@@ -14,7 +14,7 @@ load_dotenv()
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # ALLOWED_HOSTS = ['0.0.0.0', 'ticketingsystem-production-e240.up.railway.app/']
 ALLOWED_HOSTS = ['*']
