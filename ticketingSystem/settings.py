@@ -185,8 +185,8 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-LOGIN_REDIRECT_URL = '/authView'
-LOGOUT_REDIRECT_URL = '/accounts/login'
+LOGIN_REDIRECT_URL = os.environ.get('LOGIN_REDIRECT_URL')
+LOGOUT_REDIRECT_URL = os.environ.get('LOGOUT_REDIRECT_URL')
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 
@@ -195,7 +195,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # source: https://www.youtube.com/watch?v=GQySb3W2feo&ab_channel=CodeBand
 
-
+# This is for REACT
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
