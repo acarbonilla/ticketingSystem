@@ -100,11 +100,11 @@ CHANNEL_LAYERS = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get('NAME'),
-        'USER': os.environ.get('USER'),
-        'PASSWORD': os.environ.get('PASSWORD'),
-        'HOST': os.environ.get('HOST'),
-        'PORT': os.environ.get('PORT'),
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'FBd-66FcbbAEDdD6-d4BgfA66fCA-f1D',
+        'HOST': 'roundhouse.proxy.rlwy.net',
+        'PORT': '31050',
     }
 }
 
