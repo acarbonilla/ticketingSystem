@@ -16,7 +16,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ['0.0.0.0', 'ticketingsystem-production-e240.up.railway.app/']
+
 ALLOWED_HOSTS = ['*']
 # Application definition
 
@@ -185,8 +185,8 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
-LOGIN_REDIRECT_URL = '/authView'
-LOGOUT_REDIRECT_URL = '/accounts/login'
+LOGIN_REDIRECT_URL = os.getenv('LOGIN_REDIRECT_URL')
+LOGOUT_REDIRECT_URL = os.getenv('LOGOUT_REDIRECT_URL')
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 
