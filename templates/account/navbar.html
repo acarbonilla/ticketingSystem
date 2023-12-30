@@ -22,24 +22,44 @@
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{% url 'incForm' %}">Incident Request Form</a></li>
                         <li><a class="dropdown-item" href="{% url 'srForm' %}">Service Request Form</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </li>
                     <!-- This is for user that is member is staff -->
                     {% if user.is_staff %}
+
+                     <li class="nav-item dropdown">
+                        <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                           role="button">
+                            Monitored Ticket
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'staff' %}"> AOU Tickets </a></li>
+                            <li><a class="dropdown-item" href="">Priority Ticket</a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item dropdown">
-                    <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
-                       role="button">
-                        Ticket Records
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{% url 'staff' %}">Monitoring Ticket</a></li>
-                        <li><a class="dropdown-item" href="{% url 'closedTicket'%}">Closed Ticket</a></li>
-                    </ul>
-                </li>
+                        <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                           role="button">
+                            Inc Records
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'recordINC'%}">Year-2023</a></li>
+                            <li><a class="dropdown-item" href="#">Year-2024</a></li>
+                            <li><a class="dropdown-item" href="#">...</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a aria-expanded="false" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#"
+                           role="button">
+                            SR Records
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url 'recordSR'%}">Year-2023</a></li>
+                            <li><a class="dropdown-item" href="#">Year-2024</a></li>
+                            <li><a class="dropdown-item" href="#">...</a></li>
+                        </ul>
+                    </li>
 
                     {%endif%}
 

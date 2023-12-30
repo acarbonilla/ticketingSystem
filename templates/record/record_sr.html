@@ -9,7 +9,7 @@
                     <button class="btn btn-primary position-relative" type="button">
                         Closed Ticket
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    {{addTicket}}</span>
+                    {{sr_count}}</span>
                     </button>
                 </div>
                 <div class="col-sm-5">
@@ -17,20 +17,18 @@
                 </div>
 
                 <div class="col-sm-4">
-                    <form action="{% url 'december' %}" class="d-flex" method="GET">
+                    <form action="{% url 'recordSR' %}" class="d-flex" method="GET">
                         <label>
-                            <a class="btn btn-info text-white" href="{% url 'december' %}">Refresh</a>
+                            <a class="btn btn-info text-white" href="{% url 'recordSR' %}">Refresh</a>
                         </label>
                         &nbsp;
-                        <input aria-label="search" class="form-control me-2" name="dec" placeholder="Search By Name..."
+                        <input aria-label="search" class="form-control me-2" name="y_2023" placeholder="Search By Name/Ticket"
                                type="search">
                     </form>
                 </div>
 
             </div><!--End of upper row -->
-            <hr/>
-             {% include 'staff/staffnav.html' %}
-            <br/>
+
         </div>
         <div class="row">
             <div class="col-sm-12">
@@ -47,27 +45,11 @@
                         <th scope="col">Status</th>
                     </tr>
                     </thead>
-                    {% for ticket in closedQuery %}
+                    {% for ticket in year_2023 %}
                         <tbody>
                         <tr>
-                            <td>{{ticket.member}}</td>
-                            <td> <a class="btn btn-secondary" href="{% url 'incDetails' ticket.ticket %}">
-                            {{ticket.ticket}}
-                        </a></td>
-                            <td>{{ticket.category}}</td>
-                            <td>{{ticket.created }}</td>
-                            <td>{{ticket.updated}}</td>
-                            <td>{{ticket.assigned}}</td>
-                            <td>{{ticket.status}}</td>
-                        </tr>
-                        </tbody>
-                    {% endfor %}
-
-                    {% for ticket in SRClosedQuery %}
-                    <tbody>
-                    <tr>
-                        <td>{{ticket.member}}</td>
-                        <td><a class="btn btn-secondary" href="{% url 'srDetails' ticket.tickets %}">
+                            <td>{{ticket.member.first_name}} {{ticket.member.last_name}}</td>
+                           <td><a class="btn btn-secondary" href="{% url 'srDetails' ticket.tickets %}">
                             {{ticket.tickets}}
                         </a></td>
                         <td>{{ticket.category}}</td>
@@ -75,10 +57,10 @@
                         <td>{{ticket.updated}}</td>
                         <td>{{ticket.assigned}}</td>
                         <td>{{ticket.status}}</td>
-                    </tr>
-                    </tbody>
+                        </tr>
+                        </tbody>
                     {% endfor %}
-                </table>
+                  </table>
             </div>
         </div>
     </div><!-- End of only row -->
