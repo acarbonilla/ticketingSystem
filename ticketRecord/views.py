@@ -73,10 +73,24 @@ def recordSR(request):
         status="Closed", created__range=(start_date, end_date)
     ).order_by("-created")
 
+    # Set up Pagination - It can be thank you. I put the Q in Paginator and it working fine
+    p = Paginator(SRTicket.objects.filter(
+        Q(tickets__icontains=q) |
+        Q(member__username__icontains=q),
+        status="Closed", created__range=(start_date, end_date)
+    ).order_by("-created"), 1)
+
+    page = request.GET.get('page')
+    assign = p.get_page(page)
+
+    # Setting loop for counter number in pagination
+    nums = "a" * assign.paginator.num_pages
+
     # counting close ticket
     sr_count = INCTicket.objects.filter(status="Closed", created__range=(start_date, end_date)).count()
 
-    content = {'year_2023': year_2023, 'sr_count': sr_count, 'sd': sd, 'closedQuery': closedQuery}
+    content = {'year_2023': year_2023, 'sr_count': sr_count, 'sd': sd, 'closedQuery': closedQuery, 'nums': nums,
+               'assign': assign}
 
     return render(request, 'record/record_sr.html', content)
 
