@@ -120,7 +120,6 @@
                 </tbody>
                 {% endif %}
                 {% endfor %}
-
                 <!-- This is for Deskside View Service request -->
                 {% for ticket in desksideSRView %}
                 {% if ticket.assigned.user.id == user.id and ticket.status == "Open" %}
@@ -132,7 +131,6 @@
                         </a>
                     </td>
                     <td>{{ticket.category}}</td>
-
                     <td>{{ticket.created}}</td>
                     <td>{{ticket.assigned }}</td>
                     <td>{{ticket.member }}</td>
@@ -141,7 +139,6 @@
                             Update
                         </a>
                     </td>
-
                 </tr>
                 </tbody>
                 {% endif %}
@@ -150,13 +147,8 @@
                 {% endif %}
             </table>
         </div> <!-- End for Service Desk -->
-
-
     </div>
-
-
 </div>
-
 
 {%else%}
 <h1>You are not allowed here! Click this back to your homepage <a href="{%url 'authView'%}">Home </a></h1>

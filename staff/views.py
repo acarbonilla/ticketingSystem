@@ -21,9 +21,6 @@ def staff(request):
     # experimentation
     expireOn = timedelta(days=3)
 
-    # Advisory
-    advisory = Advisory.objects.all().order_by("-updated")
-
     # Table show the open Ticket - Service Desk
     incUserView = INCTicket.objects.filter(status="Open")
     srUserView = SRTicket.objects.filter(status="Open")
@@ -59,7 +56,7 @@ def staff(request):
         return redirect("authView")
     # return render(request, 'location of template') it will show a template message that you are not allowed.
 
-    context = {'sd': sd, 'ds': ds, 'advisory': advisory, 'incUserView': incUserView, 'srUserView': srUserView,
+    context = {'sd': sd, 'ds': ds, 'incUserView': incUserView, 'srUserView': srUserView,
                'countOpen': countOpen,
                # This is for Deskside View
                'desksideINCView': desksideINCView, 'desksideSRView': desksideSRView, 'dsTicketOpen': dsTicketOpen,
