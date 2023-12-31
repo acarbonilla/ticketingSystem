@@ -196,13 +196,15 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 # source: https://www.youtube.com/watch?v=GQySb3W2feo&ab_channel=CodeBand
 
 # This is for REACT
-'''
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
+    "wss://ticketingsystem.up.railway.app/ws/",
 ]
+
+
 '''
 # Experiment for CORS
 CORS_ALLOW_ALL_ORIGINS = True
+'''
 
 
 # Railway configuration
